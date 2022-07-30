@@ -8,7 +8,7 @@ const celebrate = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const router = require('./routes');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, DATABASE = 'mongodb://localhost:27017/moviesdb' } = process.env;
 const app = express();
 
 const options = {
@@ -21,7 +21,7 @@ const options = {
   credentials: true,
 };
 
-mongoose.connect('mongodb://localhost:27017/moviesdb');
+mongoose.connect(DATABASE);
 
 app.use(requestLogger);
 app.use('*', cors(options));
